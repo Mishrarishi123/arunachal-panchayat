@@ -1,0 +1,180 @@
+.pb-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.pb-modal-box {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 75vw;
+    max-width: 100vw;
+    text-align: center;
+    position: relative;
+    height: 40vw;
+}
+
+.pb-close {
+    color: black;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.pb-title {
+    color: black;
+    font-size: 3vw;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.pb-horizontal-line {
+    width: auto;
+    height: 2px;
+    background-color: #ccc;
+    margin: 8px auto 0;
+}
+
+.pb-subtitle {
+    font-size: 2.5vw;
+    font-weight: 700;
+    color: #008CFF;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.pb-description {
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.pb-dropdown {
+    top: 18rem;
+    position: absolute;
+    padding: 12px;
+    font-size: 1.2rem;
+    width: 30vw;
+    border: none;
+    border-radius: 20px;
+    background: #f1f1f1;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    left: 23vw;
+}
+
+.district-name {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.district-name:hover {
+    background-color: #f0f0f0;
+}
+
+.district-name img {
+    width: 1.5vw;
+}
+
+.pb-dropdown h1 {
+    color: black;
+}
+
+/* NEW: Dropdown list styles */
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    /* appears just below .district-name */
+    left: 0;
+    width: 100%;
+    margin-top: 8px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.dropdown-list li {
+    color: black;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-list li:hover {
+    background-color: #eaeaea;
+}
+
+/* Table Styles */
+.pb-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 10rem;
+}
+
+.table-content {
+    justify-content: space-between;
+    display: flex;
+    color: var(--Soft-text);
+    font-weight: 500;
+    padding: 1rem 8rem;
+}
+
+.table-horizontal-line {
+    width: 60vw;
+    height: 1px;
+    background-color: #c4c4c4;
+    margin: 8px auto 0;
+}
+
+
+.pb-table-2 {
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 7rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Status Styles */
+.pb-status {
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.pb-status.done {
+    color: white;
+    background-color: #32b400;
+}
+
+.pb-status.in-progress {
+    color: white;
+    background-color: #ffc107;
+}
+
+.pb-status.pending {
+    color: white;
+    background-color: #dc3545;
+}

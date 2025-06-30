@@ -1,0 +1,133 @@
+.map-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.map-bg-image {
+    opacity: 100;
+    object-fit: cover;
+  
+}
+
+.map-overlay-white {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #F4F4F4 0%, #FFFFFF 100%);
+    opacity: 0.9;
+    z-index: 10; }
+
+.map-overlay-left {
+    position: absolute;
+    left: -8rem;
+    top: 2.5rem;
+    height: 70vh;
+    width: 10vw;
+    border-radius: 9999px;
+    background-color: #86C8FF;
+    filter: blur(2rem);
+    opacity: 0.5;
+    z-index: 10;
+}
+
+.map-overlay-right {
+    position: absolute;
+    right: -1rem;
+    top: 10vw;
+    height: 20vh;
+    width: 10vw;
+    border-radius: 9999px;
+    background-color: #86C8FF;
+    filter: blur(2rem);
+    opacity: 0.5;
+    z-index: 10;
+}
+
+.map-text {
+    position: absolute;
+    text-align: center;
+    inset: 0;
+    z-index: 10;
+    padding: 2rem;
+    color: #282828;
+    font-weight: 700;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    font-size: 2rem;
+    line-height: 1.75rem;
+}
+
+.map-image {
+    position: absolute;
+    inset: 0;
+    justify-content: center;
+    top: 10rem;
+    left: 10rem;
+    align-items: center;
+    z-index: 10;
+}
+
+.map-image img {
+    width: 70vw;
+    height:35vw;
+}
+
+@media (max-width: 640px) {
+
+    .map-overlay-left,
+    .map-overlay-right {
+        display: none;
+    }
+
+    .map-text {
+        font-size: 1.25rem;
+        padding: 3rem 1rem;
+    }
+
+    .map-image {
+        position: relative;
+        top: rem;
+        left: auto;
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .map-image img {
+        max-width: 80%;
+        height: auto;
+    }
+}
+
+
+/* Medium Devices: max-width 768px */
+@media (min-width: 641px) and (max-width: 1024px) {
+   .map-overlay-left,
+    .map-overlay-right {
+        display: none;
+    }
+
+    .map-text {
+        font-size: 3vw;
+        padding: 3rem 1rem;
+    }
+
+    .map-image {
+        position: absolute;
+        top: 10rem;
+        left: 8rem;
+        width: auto;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .map-image img {
+        height: auto;
+    } 
+}
+
+
+
+
+

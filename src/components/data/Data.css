@@ -1,0 +1,286 @@
+.data-section {
+    position: relative;
+    background-color: var(--color-black);
+}
+
+.data-overlay-left {
+    position: absolute;
+    left: -8rem;
+    top: 2.5rem;
+    height: 70vh;
+    width: 12vw;
+    border-radius: 9999px;
+    background-color: #86C8FF;
+    filter: blur(5rem);
+    opacity: 0.4;
+    z-index: 10;
+}
+
+.data-overlay-right {
+    position: absolute;
+    right: 0rem;
+    top: 10vw;
+    height: 40vh;
+    width: 5vw;
+    border-radius: 9999px;
+    background-color: #86C8FF;
+    filter: blur(5rem);
+    opacity: 0.4;
+    z-index: 10;
+}
+
+.live-data-section {
+    background: linear-gradient(to bottom right, #000000, #1f2937, #1f2937);
+    padding: 4rem 1.5rem;
+    color: var(--Discription-text);
+    text-align: center;
+}
+
+/* Container */
+.live-data-container {
+    padding: 4rem 0rem;
+}
+
+.live-data-heading {
+    text-align: center;
+}
+
+/* Title */
+.live-data-title {
+    font-size: 3rem;
+    color: var(--White);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+
+/* Description */
+.live-data-description {
+    font-size: 1vw;
+    color: var(--Discription-text);
+    margin-bottom: 3rem;
+}
+
+
+.live-data-grid {
+    display: flex;
+    gap: 5rem;
+    justify-content: center;
+}
+
+.live-data-card {
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    height: 25vw;
+    width: 30vw;
+}
+
+.card-image {
+    opacity: 100;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlays */
+.card-overlay-teal {
+
+    position: absolute;
+    inset: 0;
+    overlay: var(#C4E86B, #00BCB4);
+}
+
+.card-overlay-cyan {
+    position: absolute;
+    inset: 0;
+    overlay: var(#00C5FF, #00FFE1);
+}
+
+/* Card content */
+.card-content {
+    margin-top: 3rem;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 25vw;
+    padding: 2.5rem 0;
+}
+
+.card-number {
+    font-size: 8vw;
+    font-weight: bold;
+    margin-bottom: 0rem;
+}
+
+.card-label {
+    margin-top: -2rem;
+    font-size: 2vw;
+    padding: 12px 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    background-color: #009E84;
+    color: var(--White);
+}
+
+.card-number-2 {
+    font-size: 5vw;
+    font-weight: bold;
+    margin-bottom: 0rem;
+}
+
+.card-label-2 {
+    text-align: center;
+    font-size: 2rem;
+    padding: 12px 3rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--White);
+}
+
+@media (max-width: 640px) {
+    .live-data-section {
+        padding: 2rem 2rem;
+    }
+
+    .live-data-heading {
+        padding: 1rem 2rem;
+    }
+
+    .live-data-title {
+        font-size: 8vw;
+    }
+
+    .live-data-description {
+        margin-bottom: 0rem;
+        font-size: 2.4vw;
+    }
+
+    .card-content {
+        margin-top: 1rem;
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 2.5rem 0;
+    }
+
+    .card-number {
+        font-size: 25vw;
+        font-weight: bold;
+        margin-bottom: 0rem;
+    }
+
+    .card-label {
+        font-size: 1rem;
+        padding: 6px 1rem;
+    }
+
+    .card-label-2 {
+        padding: 0px;
+        font-size: 5vw;
+    }
+
+    .card-number-2 {
+        font-size: 10vw;
+    }
+
+    .card-label {
+        margin-top: -8vw;
+        font-size: 3vw;
+        padding: 8px 4rem;
+        border-radius: 50px;
+        font-weight: 600;
+        background-color: #009E84;
+        color: var(--White);
+    }
+
+    .live-data-card {
+        height: 70vw;
+        width: auto;
+    }
+
+    .live-data-grid {
+        margin-top: 0px;
+        padding: 2rem 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1024px) {
+
+    .live-data-title {
+        font-size: 6vw;
+        color: var(--White);
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .live-data-description {
+        font-size: 1.3vw;
+        color: var(--Discription-text);
+        margin-bottom: 3rem;
+    }
+
+    .live-data-grid {
+        display: flex;
+        gap: 4rem;
+        justify-content: center;
+    }
+
+    .live-data-card {
+        position: relative;
+        border-radius: 2rem;
+        overflow: hidden;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        height: 30vw;
+        width: 35vw;
+    }
+
+    .card-content {
+        margin-top: 0px;
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 30vw;
+        padding: 1rem 0;
+    }
+
+    .card-number {
+        font-size: 10vw;
+        font-weight: bold;
+        margin-bottom: 0rem;
+    }
+
+    .card-label {
+        margin-top: -1rem;
+        font-size: 2vw;
+        padding: 8px 1rem;
+        border-radius: 50px;
+        font-weight: 600;
+        background-color: #009E84;
+        color: var(--White);
+    }
+
+    .card-label-2 {
+        padding: 0px;
+        font-size: 3vw;
+    }
+
+    .card-number-2 {
+        font-size: 5vw;
+    }
+}
