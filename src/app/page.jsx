@@ -1,4 +1,4 @@
-import Header from "../components/Header/Header.jsx";
+import Header from "../components/Header/Header";
 import Hero from "../components/hero/Hero";
 import Map from "../components/map/Map";
 import Scheme from "../components/scheme/Scheme";

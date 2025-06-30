@@ -2,7 +2,7 @@ import Image from "next/image";
 import "./Header.css";
 import "../../styles/variables.css";
 
-export default function Navbar() {
+export default function Header() {
   return (
     <header className="navbar">
       {/* Logo Section */}
