@@ -20,7 +20,7 @@ export default function Navbar() {
       </div>
 
       <div className="location">
-        <img src="./images/MapPin.svg" alt="" />
+        <img className="mt-1" src="./images/MapPin.svg" alt="" />
         <p>
           1901 Thornridge Cir. Shiloh,
           <br />
