@@ -1,14 +1,16 @@
 "use client";
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import "./Scheme.css";
-import Modal from "../modal/Pb/Pb" // Import the CSS
+import Modal from "../modal/Pb/Pb"; // Import the CSS
+import Dprc from "../modal/Dprc/Dprc";
 
 const schemesData = [
   {
     title: "RGSA",
     color: "#32B400", // green
-    items: ["Panchayat Bhavan", "DPRC"],
+    items: ["Panchayat Bhavan", "DRPC"], // Fixed: Changed "DPRC" to "DRPC"
   },
   {
     title: "SOR",
@@ -23,23 +25,28 @@ const schemesData = [
 ];
 
 const Scheme = () => {
-
   const [showPBModal, setShowPBModal] = useState(false);
+  const [showDRPCModal, setShowDRPCModal] = useState(false);
 
   const handleItemClick = (item) => {
-    if (item === "Panchayat Bhavan", "DRPC") {
+    console.log("handleItemClick called with:", item);
+
+    if (item === "Panchayat Bhavan") {
+      console.log("Opening Panchayat Bhavan modal");
       setShowPBModal(true);
+    } else if (item === "DRPC") {
+      console.log("Opening DRPC modal");
+      setShowDRPCModal(true);
     } else {
       console.log("Clicked item:", item);
     }
   };
 
- 
   return (
     <section className="schemes-section">
       <div className="scheme-overlay-left" />
-
       <div className="scheme-overlay-right" />
+
       <motion.h2
         className="schemes-heading"
         initial={{ opacity: 0, y: 40 }}
@@ -77,7 +84,7 @@ const Scheme = () => {
             transition={{
               duration: 1,
               ease: "easeOut",
-              delay: index * 0.2, // 🔥 Stagger effect
+              delay: index * 0.2,
             }}
             viewport={{ once: true, amount: 0.5 }}
           >
@@ -87,14 +94,13 @@ const Scheme = () => {
             >
               {scheme.title}
             </div>
-
             <ul className="scheme-list">
               {scheme.items.map((item, i) => (
                 <li key={i} className="scheme-item">
                   <a
                     href="#"
                     onClick={(e) => {
-                      e.preventDefault(); // prevent default anchor navigation
+                      e.preventDefault();
                       handleItemClick(item);
                     }}
                     className="scheme-link"
@@ -107,9 +113,11 @@ const Scheme = () => {
             </ul>
           </motion.div>
         ))}
-
-        <Modal isOpen={showPBModal} onClose={() => setShowPBModal(false)} />
       </div>
+
+      {/* Modals */}
+      <Modal isOpen={showPBModal} onClose={() => setShowPBModal(false)} />
+      <Dprc isOpen={showDRPCModal} onClose={() => setShowDRPCModal(false)} />
     </section>
   );
 };
