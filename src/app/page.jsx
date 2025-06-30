@@ -1,4 +1,4 @@
-import Header from "../components/Header/Header"
+import Header from '../components/Header/Header';
 import Hero from "../components/hero/Hero";
 import Map from "../components/map/Map";
 import Scheme from "../components/scheme/Scheme";
@@ -8,16 +8,14 @@ import About from "../components/about/About";
 
 export default function Home() {
   return (
-    <div>
+    <main>
       <Header />
-      <main>
-        <Hero />
-        <Map />
-        <Scheme />
-        <About />
-        <Data />
-      </main>
+      <Hero />
+      <Map />
+      <Scheme />
+      <About />
+      <Data />
       <Footer />
-    </div>
+    </main>
   );
 }
