@@ -35,6 +35,17 @@ const Dprc = ({ isOpen, onClose }) => {
     },
   ];
 
+  const districts = [
+    "Central District",
+    "Northern District",
+    "Southern District",
+    "Eastern District",
+    "Western District",
+    "Metropolitan District",
+    "Suburban District",
+    "Coastal District",
+  ];
+
   const drpcInfo = {
     name: "District Resource Person Cluster",
     status: "Active",
@@ -42,6 +53,8 @@ const Dprc = ({ isOpen, onClose }) => {
 
   // Don't render if modal is not open
   if (!isOpen) return null;
+
+  const [selectedDistrict, setSelectedDistrict] = useState("District Name");
 
   return (
     <div className="dprc-overlay">
@@ -53,7 +66,7 @@ const Dprc = ({ isOpen, onClose }) => {
           <div className="content-dprc">
             <div>
               <h1 className="pb-title">RGSA</h1>
-              <div className="pb-horizontal-line"></div>
+              <div className="dprc-horizontal-line"></div>
               <h2 className="pb-subtitle">
                 DISTRICT PANCHAYAT RESOURCE CENTER
               </h2>
@@ -63,11 +76,31 @@ const Dprc = ({ isOpen, onClose }) => {
               </p>
             </div>
 
-            <div className="district-name-2">
-              <div className="district-cont">
-                <h1>District Name</h1>
-                <img src="/images/dropdown.svg" alt="dropdown arrow" />
-              </div>
+            <div className="district-dropdown w-full max-w-sm">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="district-cont w-full justify-between h-12 px-4 text-left font-normal bg-transparent"
+                  >
+                    <h1 className="text-lg font-medium text-gray-900">
+                      {selectedDistrict}
+                    </h1>
+                    <ChevronDown className="h-4 w-4 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-full min-w-[var(--radix-dropdown-menu-trigger-width)]">
+                  {districts.map((district) => (
+                    <DropdownMenuItem
+                      key={district}
+                      onClick={() => setSelectedDistrict(district)}
+                      className="cursor-pointer"
+                    >
+                      {district}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             <div className="cont-img">

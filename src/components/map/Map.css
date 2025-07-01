@@ -1,22 +1,33 @@
+/* Base Map Section Styles */
 .map-section {
     position: relative;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .map-bg-image {
-    opacity: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
     object-fit: cover;
-  
+    z-index: 1;
 }
 
 .map-overlay-white {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, #F4F4F4 0%, #FFFFFF 100%);
+    background: linear-gradient(to bottom, #f4f4f4 0%, #ffffff 100%);
     opacity: 0.9;
-    z-index: 10; }
+    z-index: 2;
+}
 
 .map-overlay-left {
     position: absolute;
@@ -24,11 +35,12 @@
     top: 2.5rem;
     height: 70vh;
     width: 10vw;
+    min-width: 100px;
     border-radius: 9999px;
-    background-color: #86C8FF;
+    background-color: #86c8ff;
     filter: blur(2rem);
     opacity: 0.5;
-    z-index: 10;
+    z-index: 3;
 }
 
 .map-overlay-right {
@@ -37,43 +49,145 @@
     top: 10vw;
     height: 20vh;
     width: 10vw;
+    min-width: 80px;
     border-radius: 9999px;
-    background-color: #86C8FF;
+    background-color: #86c8ff;
     filter: blur(2rem);
     opacity: 0.5;
-    z-index: 10;
+    z-index: 3;
 }
 
 .map-text {
     position: absolute;
+    top: 5%;
+    left: 0;
+    right: 0;
     text-align: center;
-    inset: 0;
-    z-index: 10;
+    z-index: 5;
     padding: 2rem;
     color: #282828;
     font-weight: 700;
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-    font-size: 2rem;
-    line-height: 1.75rem;
-}
-
-.map-image {
-    position: absolute;
-    inset: 0;
-    justify-content: center;
-    top: 10rem;
-    left: 10rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    line-height: 1.4;
+    display: flex;
     align-items: center;
-    z-index: 10;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.map-image img {
-    width: 70vw;
-    height:35vw;
+.map-canvas-container {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
+    z-index: 4;
+    min-height: 100vh;
+    border-radius: 12px;
 }
 
-@media (max-width: 640px) {
+/* Large Desktop (1400px and above) */
+@media (min-width: 1400px) {
+    .map-section {
+        min-height: 800px;
+    }
+
+    .map-canvas-container {
+        top: 12%;
+        left: 8%;
+        right: 8%;
+        bottom: 8%;
+        min-height: 100vh;
+    }
+
+    .map-text {
+        padding: 3rem;
+        max-width: 1400px;
+    }
+
+    .map-overlay-left {
+        left: -10rem;
+        width: 12vw;
+        height: 75vh;
+    }
+
+    .map-overlay-right {
+        right: -2rem;
+        width: 12vw;
+        height: 25vh;
+    }
+}
+
+/* Desktop (1025px to 1399px) */
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .map-canvas-container {
+        top: 15%;
+        left: 6%;
+        right: 6%;
+        bottom: 6%;
+        min-height: 100vh;
+    }
+
+    .map-text {
+        padding: 2.5rem;
+    }
+}
+
+/* Tablet Landscape (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .map-section {
+        min-height: 600px;
+    }
+
+    .map-canvas-container {
+        top: 18%;
+        left: 4%;
+        right: 4%;
+        bottom: 4%;
+        min-height: 450px;
+    }
+
+    .map-overlay-left {
+        left: -6rem;
+        width: 8vw;
+        height: 60vh;
+        opacity: 0.3;
+    }
+
+    .map-overlay-right {
+        right: -0.5rem;
+        width: 8vw;
+        height: 18vh;
+        opacity: 0.3;
+    }
+
+    .map-text {
+        padding: 2rem 1.5rem;
+        font-size: clamp(1.3rem, 3.5vw, 2rem);
+    }
+}
+
+/* Tablet Portrait (641px to 768px) */
+@media (min-width: 641px) and (max-width: 768px) {
+    .map-section {
+        min-height: 550px;
+        height: auto;
+        padding: 2rem 0;
+    }
+
+    .map-canvas-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 90%;
+        height: 400px;
+        margin: 2rem auto;
+        order: 2;
+    }
 
     .map-overlay-left,
     .map-overlay-right {
@@ -81,53 +195,245 @@
     }
 
     .map-text {
-        font-size: 1.25rem;
-        padding: 3rem 1rem;
-    }
-
-    .map-image {
         position: relative;
-        top: rem;
-        left: auto;
-        width: 100%;
-        justify-content: center;
-        padding: 1rem;
-    }
-
-    .map-image img {
-        max-width: 80%;
-        height: auto;
+        top: auto;
+        padding: 2rem 1.5rem;
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+        order: 1;
     }
 }
 
+/* Mobile Large (481px to 640px) */
+@media (min-width: 481px) and (max-width: 640px) {
+    .map-section {
+        min-height: 500px;
+        height: auto;
+        padding: 1.5rem 0;
+    }
 
-/* Medium Devices: max-width 768px */
-@media (min-width: 641px) and (max-width: 1024px) {
-   .map-overlay-left,
+    .map-canvas-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 95%;
+        height: 350px;
+        margin: 1.5rem auto;
+        order: 2;
+    }
+
+    .map-overlay-left,
     .map-overlay-right {
         display: none;
     }
 
     .map-text {
-        font-size: 3vw;
-        padding: 3rem 1rem;
+        position: relative;
+        top: auto;
+        padding: 1.5rem 1rem;
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+        line-height: 1.3;
+        order: 1;
+    }
+}
+
+/* Mobile Medium (376px to 480px) */
+@media (min-width: 376px) and (max-width: 480px) {
+    .map-section {
+        min-height: 450px;
+        height: auto;
+        padding: 1rem 0;
     }
 
-    .map-image {
-        position: absolute;
-        top: 10rem;
-        left: 8rem;
-        width: auto;
-        justify-content: center;
+    .map-canvas-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 98%;
+        height: 300px;
+        margin: 1rem auto;
+        order: 2;
+    }
+
+    .map-overlay-left,
+    .map-overlay-right {
+        display: none;
+    }
+
+    .map-text {
+        position: relative;
+        top: auto;
+        padding: 1rem 0.75rem;
+        font-size: clamp(1rem, 4.5vw, 1.3rem);
+        line-height: 1.25;
+        order: 1;
+    }
+}
+
+/* Mobile Small (320px to 375px) */
+@media (min-width: 320px) and (max-width: 375px) {
+    .map-section {
+        min-height: 400px;
+        height: auto;
+        padding: 0.75rem 0;
+    }
+
+    .map-canvas-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        height: 280px;
+        margin: 0.75rem auto;
+        order: 2;
+    }
+
+    .map-overlay-left,
+    .map-overlay-right {
+        display: none;
+    }
+
+    .map-text {
+        position: relative;
+        top: auto;
+        padding: 0.75rem 0.5rem;
+        font-size: clamp(0.9rem, 5vw, 1.2rem);
+        line-height: 1.2;
+        order: 1;
+    }
+}
+
+/* Extra Small Mobile (below 320px) */
+@media (max-width: 319px) {
+    .map-section {
+        min-height: 350px;
+        height: auto;
+        padding: 0.5rem 0;
+    }
+
+    .map-canvas-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        height: 250px;
+        margin: 0.5rem auto;
+        order: 2;
+    }
+
+    .map-overlay-left,
+    .map-overlay-right {
+        display: none;
+    }
+
+    .map-text {
+        position: relative;
+        top: auto;
+        padding: 0.5rem 0.25rem;
+        font-size: clamp(0.8rem, 6vw, 1rem);
+        line-height: 1.1;
+        order: 1;
+    }
+}
+
+/* Landscape Mobile Orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+    .map-section {
+        height: auto;
+        min-height: 100vh;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .map-text {
+        flex: 1;
+        max-width: 40%;
+        padding: 1rem;
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        position: relative;
+        top: auto;
+    }
+
+    .map-canvas-container {
+        flex: 1;
+        max-width: 60%;
+        height: 80vh;
+        margin: 1rem;
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+}
+
+/* High Resolution Displays */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .map-canvas-container {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .map-canvas-container {
+        transition: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .map-section {
+        height: auto;
+        min-height: auto;
+        page-break-inside: avoid;
+    }
+
+    .map-overlay-left,
+    .map-overlay-right,
+    .map-overlay-white {
+        display: none;
+    }
+
+    .map-text {
+        position: relative;
+        color: #000;
+        font-size: 14pt;
         padding: 1rem;
     }
 
-    .map-image img {
-        height: auto;
-    } 
+    .map-canvas-container {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        margin: 1rem 0;
+    }
 }
 
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .map-text {
+        color: black;
+    }
+}
 
+/* Container Query Support (Future-proofing) */
+@container (max-width: 640px) {
+    .map-text {
+        font-size: clamp(1rem, 4vw, 1.3rem);
+    }
 
-
-
+    .map-canvas-container {
+        width: 95%;
+        height: 350px;
+    }
+}
