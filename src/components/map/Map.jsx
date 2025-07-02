@@ -1,16 +1,25 @@
 "use client";
 import { motion } from "framer-motion";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Image from "next/image";
 import "./Map.css";
 import { Mapmodal } from "../mapmodal/Mapmodal";
 import { Suspense, useEffect, useRef, useState } from "react";
 
+
 function RotatingMapGroup({ children }) {
   const groupRef = useRef();
+  const { viewport } = useThree();
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [scale, setScale] = useState(1);
 
+  useEffect(() => {
+    const baseScale = Math.min(viewport.width, viewport.height) * 0.01;
+    setScale(baseScale);
+  }, [viewport]);
+
+  // Mouse tracking
   useEffect(() => {
     const handleMouseMove = (event) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -22,9 +31,9 @@ function RotatingMapGroup({ children }) {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  // Rotation effect
   useFrame(() => {
     if (groupRef.current) {
-      // Smooth interpolation
       groupRef.current.rotation.y +=
         (mouse.x * 0.2 - groupRef.current.rotation.y) * 0.05;
       groupRef.current.rotation.x +=
@@ -32,8 +41,15 @@ function RotatingMapGroup({ children }) {
     }
   });
 
-  return <group ref={groupRef}>{children}</group>;
+
+
+  return (
+    <group ref={groupRef} scale={scale} rotation={[0, 0, Math.PI / 210]}>
+      {children}
+    </group>
+  );
 }
+
 
 export default function Map() {
   return (
@@ -72,9 +88,9 @@ export default function Map() {
         viewport={{ once: true, amount: 0.3 }}
       >
         <Canvas
-          className="h-screen"
+          className="map-canvas"
           camera={{
-            position: [0, 60, 120],
+            position: [0, 120, 160],
             fov: 35,
             near: 0.1,
             far: 1000,
@@ -83,6 +99,7 @@ export default function Map() {
           style={{ background: "transparent" }}
           onWheel={(e) => e.preventDefault()}
         >
+          {/* Lights */}
           <ambientLight intensity={1.0} />
           <directionalLight
             position={[20, 60, 20]}
@@ -97,32 +114,28 @@ export default function Map() {
             shadow-camera-bottom={-100}
           />
           <pointLight position={[-20, 30, -20]} intensity={0.6} />
-            <Suspense fallback={'Loader'}>
-          <RotatingMapGroup>
 
-            <Mapmodal position={[0, 0, 0]} scale={1.2} />
-          </RotatingMapGroup>
-            </Suspense>
+          {/* Suspense with rotating group */}
+          <Suspense fallback="Loading...">
+            <RotatingMapGroup>
+              <Mapmodal />
+            </RotatingMapGroup>
+          </Suspense>
 
+          {/* Orbit Controls */}
           <OrbitControls
+            enableRotate={true}
             enableZoom={false}
             enablePan={false}
-            enableRotate={false}
-            minDistance={80}
-            maxDistance={200}
-            minPolarAngle={Math.PI / 8}
-            maxPolarAngle={Math.PI / 4.4}
             enableDamping={true}
             dampingFactor={0.1}
-            // ⛔ Disable zoom on scrol
+            rotateSpeed={0.8}
             zoomSpeed={0.5}
             mouseButtons={{
-              LEFT: 0, // Disable left mouse rotate
-              MIDDLE: 1, // Optional: Middle button for zoom
+              LEFT: 0,
+              MIDDLE: 1,
               RIGHT: 2,
             }}
-            // Prevent scroll wheel zoom
-            onWheel={(e) => e.stopPropagation()}
           />
         </Canvas>
       </motion.div>

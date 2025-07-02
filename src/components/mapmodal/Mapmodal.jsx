@@ -1,47 +1,58 @@
 "use client";
-import { useRef, useEffect } from "react";
-import { useFrame } from "@react-three/fiber";
-
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useSpring, a } from "@react-spring/three";
 
-export function Mapmodal(props) {
-  const { nodes, materials } = useGLTF("/modals/MAP_AP.glb"); // Make sure this path is correct
-
-  const [hovered, setHovered] = useState(null);
+export const Mapmodal = forwardRef(function Mapmodal(props, ref) {
+  const { nodes, materials } = useGLTF("/modals/MAP_AP.glb");
+  const [hoveredName, setHoveredName] = useState(null);
 
   const handlePointerOver = (name) => {
-    setHovered(name);
+    setHoveredName(name);
     document.body.style.cursor = "pointer";
   };
 
   const handlePointerOut = () => {
-    setHovered(null);
+    setHoveredName(null);
     document.body.style.cursor = "default";
   };
 
   const renderMesh = (name) => {
     const node = nodes[name];
-    if (!node?.geometry) return null;
+    const geometry = node?.geometry;
+
+    if (!geometry) return null;
+
+    const isHovered = hoveredName === name;
+    const isAnyHovered = hoveredName !== null;
+
+    // Apply spring **per mesh** based on its own hovered state
+    const { scale } = useSpring({
+      scale: isHovered ? [1.2, 1.2, 1.2] : [1, 1, 1],
+      config: { mass: 1, tension: 180, friction: 18 },
+    });
 
     return (
-      <mesh
+      <a.mesh
         key={name}
-        geometry={node.geometry}
+        geometry={geometry}
         material={materials.Material}
-        scale={hovered === name ? [1, 1, 1] : [1, 1, 1]}
-        onPointerOver={() => handlePointerOver(name)}
-        onPointerOut={handlePointerOut}
+        scale={scale}
+        onPointerOver={(e) => {
+          handlePointerOver(name);
+          e.stopPropagation();
+        }}
+        onPointerOut={(e) => {
+          handlePointerOut();
+          e.stopPropagation();
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          props.onMeshClick?.(node);
+        }}
       />
     );
   };
-
-
-
-
-
-
-  
 
   const meshNames = [
     "polySurface44",
@@ -72,8 +83,8 @@ export function Mapmodal(props) {
   ];
 
   return (
-    <group {...props} dispose={null}>
+    <group ref={ref} {...props} dispose={null}>
       {meshNames.map(renderMesh)}
     </group>
   );
-}
+});
