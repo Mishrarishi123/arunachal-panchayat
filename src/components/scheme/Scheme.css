@@ -225,11 +225,34 @@
     }
 
     .schemes-cards {
-        grid-template-columns: repeat( 1fr);
+        margin: 2rem;
+        display: flex;
         gap: 2rem;
     }
 
+    .scheme-item {
+        color: black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0rem;
+        border-top: 1px solid #eee;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: color 0.2s ease;
+    }
+
+    .scheme-header {
+        margin-bottom: 1rem;
+        font-size: 2vw;
+    }
+
+    .scheme-link {
+        font-size: 1.3vw;
+    }
+
     .scheme-card {
+        height: 30vw;
         padding: 2rem 1.5rem;
     }
 
@@ -261,14 +284,37 @@
         height: 25vh;
     }
 
-    .schemes-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-
-    .scheme-card {
-        padding: 1.5rem 1rem;
-    }
+        .schemes-cards {
+            margin: 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+    
+        .scheme-item {
+            color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0rem;
+            border-top: 1px solid #eee;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s ease;
+        }
+    
+        .scheme-header {
+            margin-bottom: 1rem;
+            font-size: 2vw;
+        }
+    
+        .scheme-link {
+            font-size: 1.3vw;
+        }
+    
+        .scheme-card {
+            height: 30vw;
+            padding: 2rem 1.5rem;
+        }
 
     .schemes-description {
         margin-bottom: 2rem;
@@ -350,7 +396,7 @@
     .scheme-header {
         margin-bottom: 1rem;
         padding: 0.5rem 0.75rem;
-        font-size: 1.1rem;
+        font-size: 2vw;
     }
 
     .scheme-link {

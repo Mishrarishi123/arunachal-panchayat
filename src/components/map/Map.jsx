@@ -91,7 +91,7 @@ export default function Map() {
           <Canvas
             className="map-canvas"
             camera={{
-              position: [0, 120, 160],
+              position: [0, 120, 120],
               fov: 35,
               near: 0.1,
               far: 1000,
