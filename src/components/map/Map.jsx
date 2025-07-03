@@ -7,7 +7,6 @@ import "./Map.css";
 import { Mapmodal } from "../mapmodal/Mapmodal";
 import { Suspense, useEffect, useRef, useState } from "react";
 
-
 function RotatingMapGroup({ children }) {
   const groupRef = useRef();
   const { viewport } = useThree();
@@ -41,15 +40,12 @@ function RotatingMapGroup({ children }) {
     }
   });
 
-
-
   return (
     <group ref={groupRef} scale={scale} rotation={[0, 0, Math.PI / 210]}>
       {children}
     </group>
   );
 }
-
 
 export default function Map() {
   return (
@@ -91,7 +87,7 @@ export default function Map() {
           <Canvas
             className="map-canvas"
             camera={{
-              position: [0, 120, 120],
+              position: [0, 120, 160],
               fov: 35,
               near: 0.1,
               far: 1000,
@@ -125,6 +121,7 @@ export default function Map() {
 
             {/* Orbit Controls */}
             <OrbitControls
+              maxPolarAngle={Math.PI / 2}
               enableRotate={true}
               enableZoom={false}
               enablePan={false}

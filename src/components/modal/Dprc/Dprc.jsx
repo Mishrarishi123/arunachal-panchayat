@@ -3,13 +3,23 @@
 import { useState } from "react";
 import "./Dprc.css";
 
-
 /**
  * DRPC Modal Component
  * @param {{ isOpen: boolean, onClose: function }} props
  */
 const Dprc = ({ isOpen, onClose }) => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleSelectDistrict = (district) => {
+    setSelectedDistrict(district);
+    setDropdownOpen(false);
+  };
 
   // Sample DRPC data - replace with your actual data
   const drpcImages = [
@@ -36,14 +46,11 @@ const Dprc = ({ isOpen, onClose }) => {
   ];
 
   const districts = [
-    "Central District",
-    "Northern District",
-    "Southern District",
-    "Eastern District",
-    "Western District",
-    "Metropolitan District",
-    "Suburban District",
-    "Coastal District",
+    "District-1",
+    "District-2",
+    "District-3",
+    "District-4",
+    "District-5",
   ];
 
   const drpcInfo = {
@@ -72,6 +79,24 @@ const Dprc = ({ isOpen, onClose }) => {
                 Here you can see the images of Panchayat
                 <br /> Bhawan of your district
               </p>
+              <div className="pb-dropdown">
+                <div className="district-name" onClick={toggleDropdown}>
+                  <h1>{selectedDistrict || "Select District"}</h1>
+                  <img src="/images/dropdown.svg" alt="dropdown arrow" />
+                </div>
+                {dropdownOpen && (
+                  <ul className="dropdown-list">
+                    {districts.map((district) => (
+                      <li
+                        key={district}
+                        onClick={() => handleSelectDistrict(district)}
+                      >
+                        {district}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
 
             <div className="cont-img">

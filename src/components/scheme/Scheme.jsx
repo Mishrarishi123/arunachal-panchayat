@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import "./Scheme.css";
 import Modal from "../modal/Pb/Pb"; // Import the CSS
 import Dprc from "../modal/Dprc/Dprc";
+import GrantContent from "../modal/Basic-grants/Grant-content";
+import TiedContent from "../modal/Tied-grants/Tied-content";
 
 const schemesData = [
   {
@@ -27,7 +29,8 @@ const schemesData = [
 const Scheme = () => {
   const [showPBModal, setShowPBModal] = useState(false);
   const [showDRPCModal, setShowDRPCModal] = useState(false);
-
+  const [selectedGrant, setSelectedGrant] = useState(null);
+  const [selectedFCGrant, setSelectedFCGrant] = useState(null);
   const handleItemClick = (item) => {
     console.log("handleItemClick called with:", item);
 
@@ -37,6 +40,10 @@ const Scheme = () => {
     } else if (item === "DRPC") {
       console.log("Opening DRPC modal");
       setShowDRPCModal(true);
+    } else if (item === "Basic Grants" || item === "Performance Grants") {
+      setSelectedGrant(item);
+    } else if (item === "Tied Funds" || item === "Untied Funds") {
+      setSelectedGrant(item);
     } else {
       console.log("Clicked item:", item);
     }
@@ -118,6 +125,16 @@ const Scheme = () => {
       {/* Modals */}
       <Modal isOpen={showPBModal} onClose={() => setShowPBModal(false)} />
       <Dprc isOpen={showDRPCModal} onClose={() => setShowDRPCModal(false)} />
+      <GrantContent
+        isOpen={!!selectedGrant}
+        onClose={() => setSelectedGrant(null)}
+        type={selectedGrant}
+      />
+      <TiedContent
+        isOpen={!!selectedGrant}
+        onClose={() => setSelectedGrant(null)}
+        type={selectedGrant}
+      />
     </section>
   );
 };

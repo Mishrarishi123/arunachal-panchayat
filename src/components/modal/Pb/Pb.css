@@ -232,6 +232,12 @@
     }
 }
 
+@media (max-width: 1440px) {
+    .pb-modal-box {
+        height: 90vh;
+    }
+}
+
 /* Mobile Styles */
 @media (max-width: 480px) {
     .pb-modal-overlay {
@@ -239,6 +245,7 @@
     }
 
     .pb-modal-box {
+        height: 70vh;
         padding: 1rem;
         width: 98vw;
         border-radius: 0.5rem;
@@ -298,6 +305,7 @@
 /* Large Desktop Styles */
 @media (min-width: 1200px) {
     .pb-modal-box {
+        height: 80vh;
         width: 75vw;
         max-width: 1400px;
         padding: 3rem;
