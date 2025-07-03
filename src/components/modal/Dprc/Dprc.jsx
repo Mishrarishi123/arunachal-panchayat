@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import "./Dprc.css";
-import Image from "next/image";
+
 
 /**
  * DRPC Modal Component
@@ -54,8 +54,6 @@ const Dprc = ({ isOpen, onClose }) => {
   // Don't render if modal is not open
   if (!isOpen) return null;
 
-  const [selectedDistrict, setSelectedDistrict] = useState("District Name");
-
   return (
     <div className="dprc-overlay">
       <div className="dprc-content">
@@ -74,33 +72,6 @@ const Dprc = ({ isOpen, onClose }) => {
                 Here you can see the images of Panchayat
                 <br /> Bhawan of your district
               </p>
-            </div>
-
-            <div className="district-dropdown w-full max-w-sm">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="district-cont w-full justify-between h-12 px-4 text-left font-normal bg-transparent"
-                  >
-                    <h1 className="text-lg font-medium text-gray-900">
-                      {selectedDistrict}
-                    </h1>
-                    <ChevronDown className="h-4 w-4 opacity-50" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-full min-w-[var(--radix-dropdown-menu-trigger-width)]">
-                  {districts.map((district) => (
-                    <DropdownMenuItem
-                      key={district}
-                      onClick={() => setSelectedDistrict(district)}
-                      className="cursor-pointer"
-                    >
-                      {district}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
             </div>
 
             <div className="cont-img">

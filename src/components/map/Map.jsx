@@ -87,57 +87,59 @@ export default function Map() {
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <Canvas
-          className="map-canvas"
-          camera={{
-            position: [0, 120, 160],
-            fov: 35,
-            near: 0.1,
-            far: 1000,
-          }}
-          shadows
-          style={{ background: "transparent" }}
-          onWheel={(e) => e.preventDefault()}
-        >
-          {/* Lights */}
-          <ambientLight intensity={1.0} />
-          <directionalLight
-            position={[20, 60, 20]}
-            intensity={1.8}
-            castShadow
-            shadow-mapSize-width={2048}
-            shadow-mapSize-height={2048}
-            shadow-camera-far={200}
-            shadow-camera-left={-100}
-            shadow-camera-right={100}
-            shadow-camera-top={100}
-            shadow-camera-bottom={-100}
-          />
-          <pointLight position={[-20, 30, -20]} intensity={0.6} />
-
-          {/* Suspense with rotating group */}
-          <Suspense fallback="Loading...">
-            <RotatingMapGroup>
-              <Mapmodal />
-            </RotatingMapGroup>
-          </Suspense>
-
-          {/* Orbit Controls */}
-          <OrbitControls
-            enableRotate={true}
-            enableZoom={false}
-            enablePan={false}
-            enableDamping={true}
-            dampingFactor={0.1}
-            rotateSpeed={0.8}
-            zoomSpeed={0.5}
-            mouseButtons={{
-              LEFT: 0,
-              MIDDLE: 1,
-              RIGHT: 2,
+        <div className="map-container">
+          <Canvas
+            className="map-canvas"
+            camera={{
+              position: [0, 120, 160],
+              fov: 35,
+              near: 0.1,
+              far: 1000,
             }}
-          />
-        </Canvas>
+            shadows
+            style={{ background: "transparent" }}
+            onWheel={(e) => e.preventDefault()}
+          >
+            {/* Lights */}
+            <ambientLight intensity={1.0} />
+            <directionalLight
+              position={[20, 60, 20]}
+              intensity={1.8}
+              castShadow
+              shadow-mapSize-width={2048}
+              shadow-mapSize-height={2048}
+              shadow-camera-far={200}
+              shadow-camera-left={-100}
+              shadow-camera-right={100}
+              shadow-camera-top={100}
+              shadow-camera-bottom={-100}
+            />
+            <pointLight position={[-20, 30, -20]} intensity={0.6} />
+
+            {/* Suspense with rotating group */}
+            <Suspense fallback="Loading...">
+              <RotatingMapGroup>
+                <Mapmodal />
+              </RotatingMapGroup>
+            </Suspense>
+
+            {/* Orbit Controls */}
+            <OrbitControls
+              enableRotate={true}
+              enableZoom={false}
+              enablePan={false}
+              enableDamping={true}
+              dampingFactor={0.1}
+              rotateSpeed={0.8}
+              zoomSpeed={0.5}
+              mouseButtons={{
+                LEFT: 0,
+                MIDDLE: 1,
+                RIGHT: 2,
+              }}
+            />
+          </Canvas>
+        </div>
       </motion.div>
     </div>
   );
