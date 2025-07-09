@@ -104,7 +104,7 @@ export default function Footer() {
                         { href: "https://facebook.com", icon: "facebook" },
                         { href: "https://twitter.com", icon: "x" },
                         { href: "https://linkdIn.com", icon: "linkdIn" },
-                        { href: "https://instagram.com", icon: "instagram" },
+                        { href: "https://instagram.com", icon: "Instagram" },
                         { href: "https://youtube.com", icon: "youtube" },
                       ].map(({ href, icon }, idx) => (
                         <li key={idx}>
