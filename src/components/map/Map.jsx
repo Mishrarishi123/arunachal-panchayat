@@ -1,11 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+// import { OrbitControls } from "@react-three/drei";
 import Image from "next/image";
 import "./Map.css";
 import { Mapmodal } from "../mapmodal/Mapmodal";
 import { Suspense, useEffect, useRef, useState } from "react";
+
+
 
 function RotatingMapGroup({ children }) {
   const groupRef = useRef();
@@ -30,16 +32,6 @@ function RotatingMapGroup({ children }) {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Rotation effect
-  useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y +=
-        (mouse.x * 0.2 - groupRef.current.rotation.y) * 0.05;
-      groupRef.current.rotation.x +=
-        (mouse.y * 0.2 - groupRef.current.rotation.x) * 0.05;
-    }
-  });
-
   return (
     <group ref={groupRef} scale={scale} rotation={[0, 0, Math.PI / 210]}>
       {children}
@@ -48,8 +40,20 @@ function RotatingMapGroup({ children }) {
 }
 
 export default function Map() {
+  const [clickedName, setClickedName] = useState(null); // state here
   return (
     <div className="map-section">
+      {/* Popup at top-left */}
+      {clickedName && (
+        <div className="popup-top-left">
+          <div className="popup-content">
+            <h3>{clickedName}</h3>
+            <p>Info about this area.</p>
+            <button onClick={() => setClickedName(null)}>Close</button>
+          </div>
+        </div>
+      )}
+
       {/* Background Image */}
       <Image
         src="/images/map.jpg"
@@ -87,7 +91,7 @@ export default function Map() {
           <Canvas
             className="map-canvas"
             camera={{
-              position: [0, 120, 160],
+              position: [0, 120, 0],
               fov: 35,
               near: 0.1,
               far: 1000,
@@ -111,21 +115,23 @@ export default function Map() {
               shadow-camera-bottom={-100}
             />
             <pointLight position={[-20, 30, -20]} intensity={0.6} />
-
             {/* Suspense with rotating group */}
             <Suspense fallback="Loading...">
               <RotatingMapGroup>
-                <Mapmodal />
+                <Mapmodal
+                  clickedName={clickedName}
+                  setClickedName={setClickedName}
+                />
               </RotatingMapGroup>
             </Suspense>
 
             {/* Orbit Controls */}
-            <OrbitControls
+            {/* <OrbitControls
               maxPolarAngle={Math.PI / 2}
-              enableRotate={true}
+              enableRotate={false}
               enableZoom={false}
               enablePan={false}
-              enableDamping={true}
+              enableDamping={false}
               dampingFactor={0.1}
               rotateSpeed={0.8}
               zoomSpeed={0.5}
@@ -134,7 +140,7 @@ export default function Map() {
                 MIDDLE: 1,
                 RIGHT: 2,
               }}
-            />
+            /> */}
           </Canvas>
         </div>
       </motion.div>
