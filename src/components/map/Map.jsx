@@ -53,7 +53,7 @@ export default function Map() {
             <button className="closeIcon" onClick={() => setClickedName(null)}>
               ✕
             </button>
-            <DistrictReportCard />
+            <DistrictReportCard  />
           </div>
         </div>
       )}

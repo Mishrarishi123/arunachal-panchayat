@@ -66,10 +66,50 @@
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     margin: 0;
 }
+/* Container for district list */
+.pb-dropdown {
+    margin-top: 2rem;
+}
 
-.district-cont img {
-    width: 1.5rem;
-    height: auto;
+.district-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Display as a grid, not a dropdown */
+.dropdown-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Individual clickable district item */
+.district-item {
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.district-item:hover {
+    background-color: #e5e7eb;
+    transform: translateY(-2px);
+}
+
+/* Active state */
+.district-item.active {
+    background-color: #6366f1;
+    color: white;
+    border-color: #6366f1;
 }
 
 .district-cont {

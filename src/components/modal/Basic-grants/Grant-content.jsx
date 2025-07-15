@@ -1,29 +1,16 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import "./GrantContent.css";
-import DataTable from "../../ui/table/DataTable"
+import DataTable from "../../ui/table/DataTable";
 import DistrictDataTable from "../../ui/table/DistrictDataTable";
+import DistrictGrid from "@/components/ui/DistrictGrid";
+
 const GrantContent = ({ isOpen, onClose, type }) => {
-const [showDistrictPopup, setShowDistrictPopup] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
 
-  const districtData = {
-    "District-1": {},
-    "District-2": {},
-    "District-3": {},
-    "District-4": {},
-    "District-5": {},
-    "District-6": {},
-    "District-7": {},
-    "District-8": {},
-    "District-9": {},
-    "District-10": {},
-    "District-11": {},
-    "District-12": {},
-    "District-13": {},
-    "District-14": {},
-    "District-15": {},
+  const handleSelectDistrict = (district) => {
+    setSelectedDistrict(district);
   };
 
   const getGrantData = () => {
@@ -51,24 +38,7 @@ const [showDistrictPopup, setShowDistrictPopup] = useState(false);
       return {
         title: "SOR",
         subtitle: "TOP 15 DISTRICTS",
-        images: [
-          {
-            id: 1,
-            alt: "Performance Grant Metrics 1",
-          },
-          {
-            id: 2,
-            alt: "Performance Grant Results 2",
-          },
-          {
-            id: 3,
-            alt: "Performance Grant Analysis 3",
-          },
-          {
-            id: 4,
-            alt: "Performance Grant Dashboard 4",
-          },
-        ],
+        images: [],
         info: {
           name: "Performance Grants Program",
           status: "Active",
@@ -80,17 +50,6 @@ const [showDistrictPopup, setShowDistrictPopup] = useState(false);
   };
 
   const grantData = getGrantData();
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  const handleSelectDistrict = (district) => {
-    setSelectedDistrict(district);
-    setDropdownOpen(false);
-    setShowDistrictPopup(true); // show the popup
-  };
-
   if (!isOpen || !grantData) return null;
 
   return (
@@ -100,6 +59,7 @@ const [showDistrictPopup, setShowDistrictPopup] = useState(false);
           <button className="grant-close" onClick={onClose}>
             ✕
           </button>
+
           <div className="content-grant">
             <div>
               <h1 className="grant-title">{grantData.title}</h1>
@@ -107,56 +67,23 @@ const [showDistrictPopup, setShowDistrictPopup] = useState(false);
               <h2 className="grant-subtitle">{grantData.subtitle}</h2>
             </div>
 
-            <div className="pb-dropdown">
-              <div className="district-name" onClick={toggleDropdown}>
-                <h1>{selectedDistrict || "Select District"}</h1>
-                <img src="/images/dropdown.svg" alt="dropdown arrow" />
-              </div>
-              {dropdownOpen && (
-                <ul className="dropdown-list">
-                  {Object.keys(districtData).map((district) => (
-                    <li
-                      key={district}
-                      onClick={() => handleSelectDistrict(district)}
-                    >
-                      {district}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            {showDistrictPopup && (
+            <DistrictGrid
+              selectedDistrict={selectedDistrict}
+              onSelect={handleSelectDistrict}
+              
+            />
+
+            {selectedDistrict && (
               <div className="district-popup">
+                <h4 className="popup-district-title">
+                  Report for {selectedDistrict}
+                </h4>
                 <div className="district-popup-content popup-table">
-                  {/* <button
-                    className="close-btn"
-                    onClick={() => setShowDistrictPopup(false)}
-                  >
-                    ✕
-                  </button> */}
                   <DataTable />
                   <DistrictDataTable />
                 </div>
               </div>
             )}
-
-            {/* <div className="cont-img">
-              {grantData.images.map((image) => (
-                <div
-                  key={image.id}
-                  className="image-card"
-                  onClick={() => setSelectedImage(image.id)}
-                >
-                  <img
-                    src={image.src || "/placeholder.svg"}
-                    alt={image.alt}
-                    width={250}
-                    height={150}
-                    className="image-thumbnail"
-                  />
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>
