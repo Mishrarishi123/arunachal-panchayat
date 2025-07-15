@@ -8,8 +8,9 @@
 }
 
 .district-card {
-    width: 30vw;
-    max-width: 24vw;
+    flex-direction: column;
+    width: 65vw;
+    max-width: 72vw;
     background-color: white;
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
