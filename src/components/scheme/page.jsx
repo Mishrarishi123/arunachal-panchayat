@@ -32,9 +32,16 @@ const schemesData = [
 const Scheme = () => {
   const [showPBModal, setShowPBModal] = useState(false);
   const [showDRPCModal, setShowDRPCModal] = useState(false);
-  const [selectedGrant, setSelectedGrant] = useState(null);
+
+  // ✅ Add these missing modal states
+  const [showBasicGrant, setShowBasicGrant] = useState(false);
+  const [showPerformanceGrant, setShowPerformanceGrant] = useState(false);
+  const [showTiedGrant, setShowTiedGrant] = useState(false);
+  const [showUntiedGrant, setShowUntiedGrant] = useState(false);
+
   const [openDropdowns, setOpenDropdowns] = useState({});
 
+ 
   const handleDropdownToggle = (index) => {
     setOpenDropdowns((prev) => ({
       ...prev,
@@ -43,16 +50,27 @@ const Scheme = () => {
   };
 
   const handleItemClick = (item) => {
-    if (item === "Panchayat Bhavan") setShowPBModal(true);
-    else if (item === "DRPC") setShowDRPCModal(true);
-    else if (
-      item === "Basic Grants" ||
-      item === "Performance Grants" ||
-      item === "Tied Funds" ||
-      item === "Untied Funds"
-    )
-      setSelectedGrant(item);
-    setOpenDropdowns({});
+    setOpenDropdowns({}); // Close all dropdowns
+    switch (item) {
+      case "Panchayat Bhavan":
+        setShowPBModal(true);
+        break;
+      case "DRPC":
+        setShowDRPCModal(true);
+        break;
+      case "Basic Grants":
+        setShowBasicGrant(true);
+        break;
+      case "Performance Grants":
+        setShowPerformanceGrant(true);
+        break;
+      case "Tied Funds":
+        setShowTiedGrant(true);
+        break;
+      case "Untied Funds":
+        setShowUntiedGrant(true);
+        break;
+    }
   };
 
   return (
@@ -160,14 +178,24 @@ const Scheme = () => {
       <Modal isOpen={showPBModal} onClose={() => setShowPBModal(false)} />
       <Dprc isOpen={showDRPCModal} onClose={() => setShowDRPCModal(false)} />
       <GrantContent
-        isOpen={!!selectedGrant}
-        onClose={() => setSelectedGrant(null)}
-        type={selectedGrant}
+        isOpen={showBasicGrant}
+        onClose={() => setShowBasicGrant(false)}
+        type="Basic Grants"
+      />
+      <GrantContent
+        isOpen={showPerformanceGrant}
+        onClose={() => setShowPerformanceGrant(false)}
+        type="Performance Grants"
       />
       <TiedContent
-        isOpen={!!selectedGrant}
-        onClose={() => setSelectedGrant(null)}
-        type={selectedGrant}
+        isOpen={showTiedGrant}
+        onClose={() => setShowTiedGrant(false)}
+        type="Tied Funds"
+      />
+      <TiedContent
+        isOpen={showUntiedGrant}
+        onClose={() => setShowUntiedGrant(false)}
+        type="Untied Funds"
       />
     </section>
   );

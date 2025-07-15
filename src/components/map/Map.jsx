@@ -6,6 +6,9 @@ import Image from "next/image";
 import "./Map.css";
 import { Mapmodal } from "../mapmodal/Mapmodal";
 import { Suspense, useEffect, useRef, useState } from "react";
+import DataTable from "../ui/table/DataTable";
+import DistrictDataTable from "../ui/table/DistrictDataTable";
+import DistrictReportCard from "../ui/DistrictReportCard";
 
 
 
@@ -45,11 +48,12 @@ export default function Map() {
     <div className="map-section">
       {/* Popup at top-left */}
       {clickedName && (
-        <div className="popup-top-left">
-          <div className="popup-content">
-            <h3>{clickedName}</h3>
-            <p>Info about this area.</p>
-            <button onClick={() => setClickedName(null)}>Close</button>
+        <div className="popup-overlay">
+          <div className="popup-top-left">
+            <button className="closeIcon" onClick={() => setClickedName(null)}>
+              ✕
+            </button>
+            <DistrictReportCard />
           </div>
         </div>
       )}

@@ -55,6 +55,10 @@
     line-height: 1.6;
 }
 
+
+
+
+
 /* Cards Layout */
 .schemes-cards {
     display: flex;
@@ -97,6 +101,11 @@
 .dropdown-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.pb-dropdown {
+    right: 1rem;
+    left: 5rem;
 }
 
 /* Arrow Rotation */
@@ -173,6 +182,9 @@
     .dropdown-container {
         width: 30vw;
     }
+
+        .pb-dropdown {
+            justify-content: center;   }
 }
 
 @media (max-width: 768px) {

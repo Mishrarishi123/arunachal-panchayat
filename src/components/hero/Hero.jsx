@@ -49,7 +49,7 @@ export default function HeroCarousel() {
         autoplay={{ delay: 4000 }}
         pagination={{
           clickable: true,
-          el: ".custom-pagination", // 👈 Custom container
+          el: ".custom-pagination",
         }}
         className="hero-swiper"
       >

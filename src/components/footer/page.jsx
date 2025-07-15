@@ -7,7 +7,9 @@ import "./Footer.css";
 
 export default function Footer() {
   return (
-    <section className="footer-section">
+    <section 
+    id="footer"
+    className="footer-section">
       <div className="footer">
         <motion.div
           className="footer-container"

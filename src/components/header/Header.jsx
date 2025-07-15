@@ -21,10 +21,16 @@ export default function Header() {
 
       <header className="navbar">
         <div className="header-logo">
-          <Image src="/images/logo.svg" alt="Logo" width={120} height={50} />
+          <div className="header-logo-img">
+            <Image src="/images/logo.svg" alt="Logo" width={120} height={50} />
+          </div>
           <div className="location">
             <img className="mt-1" src="/images/MapPin.svg" alt="Pin" />
-            <p>Vallabh Bhavan-2, Itanagar,<br/>AP 790104</p>
+            <p>
+              Vallabh Bhavan-2, Itanagar,
+              <br />
+              AP 790104
+            </p>
           </div>
         </div>
 
@@ -58,7 +64,7 @@ export default function Header() {
               <Link href="/scheme">Scheme</Link>
             </li>
             <li onClick={closeMenu}>
-              <Link href="/contact">Contact</Link>
+              <a href="#footer">Contact</a>
             </li>
           </ul>
         </nav>
