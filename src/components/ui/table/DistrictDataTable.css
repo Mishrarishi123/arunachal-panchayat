@@ -14,18 +14,16 @@
 }
 
 /* Each card block */
-.district-card {
-    width: 10vw;
-    max-width: 10vw;
-/* justify-content: space-between;
-    flex-direction: row;
-    width: 18vw;
+.district-card-map {
+justify-content: space-between;
+    flex-direction: column;
+    width: 30vw;
     max-width: 72vw;
     background-color: white;
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     display: flex;
-    overflow: hidden; */
+    overflow: hidden;
 }
 
 .district-label {

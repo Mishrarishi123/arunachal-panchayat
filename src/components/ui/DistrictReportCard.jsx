@@ -8,7 +8,7 @@ import "./DistrictReportCard.css";
 export default function DistrictReportCard() {
   return (
     <div className="district-report-wrapper">
-      <div className="district-card">
+      <div className="district-card-map">
         {/* Header */}
         <div className="district-card-header">
           <h2 className="district-title">District: Papum Pare</h2>
