@@ -3,9 +3,9 @@
 import Link from "next/link";
 import "./DistrictDataTable.css";
 
-export default function DistrictDataTable() {
+export default function DistrictDataTable({ stateName }) {
   const data = [
-    { label: "District", value: "Papum Pare" },
+    { label: "District", value: stateName | "N/A" },
     { label: "Rank", value: "1st in State" },
     { label: "Total Score", value: "95 / 100" },
     { label: "Grant Received", value: "₹1.25 Cr" },
@@ -17,7 +17,7 @@ export default function DistrictDataTable() {
       {data.map((item) => (
         <div key={item.label} className="district-card">
           <div className="district-label">{item.label}</div>
-          <div className="district-value">{item.value}</div>
+          <div className="district-value"> value {item.value}</div>
         </div>
       ))}
 

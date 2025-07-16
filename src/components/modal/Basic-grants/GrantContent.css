@@ -80,7 +80,7 @@
 /* Display as a grid, not a dropdown */
 .dropdown-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(1, minmax(160px, 1fr));
     gap: 1rem;
     padding: 0;
     margin: 0;
@@ -215,8 +215,8 @@
 }
 
 .grant-subtitle {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 800;
     color: #34495e;
     margin-bottom: 15px;
     text-align: center;
@@ -258,7 +258,7 @@
     }
 
     .grant-content {
-        width: 95vw;
+        width: 70vw;
         padding: 1.5rem;
         min-height: 300px;
         border-radius: 0.75rem;
@@ -293,7 +293,7 @@
     }
 
     .grant-subtitle {
-        font-size: 1.2rem;
+        font-size: 3vw;
     }
 }
 

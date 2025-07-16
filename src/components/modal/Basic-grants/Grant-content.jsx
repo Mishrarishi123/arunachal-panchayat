@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import "./GrantContent.css";
-import DataTable from "../../ui/table/DataTable";
-import DistrictDataTable from "../../ui/table/DistrictDataTable";
+// import DataTable from "../../ui/table/DataTable";
+// import DistrictDataTable from "../../ui/table/DistrictDataTable";
 import DistrictGrid from "@/components/ui/DistrictGrid";
 
 const GrantContent = ({ isOpen, onClose, type }) => {
@@ -70,20 +70,19 @@ const GrantContent = ({ isOpen, onClose, type }) => {
             <DistrictGrid
               selectedDistrict={selectedDistrict}
               onSelect={handleSelectDistrict}
-              
             />
 
-            {selectedDistrict && (
+            {/* {selectedDistrict && (
               <div className="district-popup">
                 <h4 className="popup-district-title">
                   Report for {selectedDistrict}
                 </h4>
                 <div className="district-popup-content popup-table">
                   <DataTable />
-                  <DistrictDataTable />
+                  <DistrictDataTable stateName={selectedDistrict} />
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

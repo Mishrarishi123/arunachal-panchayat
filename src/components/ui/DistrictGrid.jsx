@@ -32,9 +32,9 @@ export default function DistrictGrid({
           <Button
             key={district}
             onClick={() => onSelect?.(district)}
-            className={`district-btn ${
-              selectedDistrict === district ? "active" : ""
-            }`}
+            // className={`district-btn ${
+            //   selectedDistrict === district ? "active" : ""
+            // }`}
           >
             {index + 1}. {district}
           </Button>

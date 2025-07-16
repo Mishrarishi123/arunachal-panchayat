@@ -6,10 +6,7 @@ import Image from "next/image";
 import "./Map.css";
 import { Mapmodal } from "../mapmodal/Mapmodal";
 import { Suspense, useEffect, useRef, useState } from "react";
-import DataTable from "../ui/table/DataTable";
-import DistrictDataTable from "../ui/table/DistrictDataTable";
 import DistrictReportCard from "../ui/DistrictReportCard";
-
 
 
 function RotatingMapGroup({ children }) {
@@ -43,17 +40,20 @@ function RotatingMapGroup({ children }) {
 }
 
 export default function Map() {
-  const [clickedName, setClickedName] = useState(null); // state here
+  const [clickedName, setClickedName] = useState(null);
+  const handleDistrictClick = () => {
+    setClickedName("Papum Pare");
+  };
+
   return (
     <div className="map-section">
       {/* Popup at top-left */}
       {clickedName && (
         <div className="popup-overlay">
           <div className="popup-top-left">
-            <button className="closeIcon" onClick={() => setClickedName(null)}>
-              ✕
-            </button>
-            <DistrictReportCard  />
+            {clickedName && (
+              <DistrictReportCard onClose={() => setClickedName(null)} />
+            )}
           </div>
         </div>
       )}

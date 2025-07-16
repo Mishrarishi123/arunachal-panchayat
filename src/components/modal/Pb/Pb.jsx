@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,  } from "react";
 import "./Pb.css";
 
 const districtData = {
@@ -9,6 +9,7 @@ const districtData = {
 };
 
 export default function Modal({ isOpen, onClose }) {
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedDistrict, setSelectedDistrict] = useState("");
 
@@ -46,7 +47,7 @@ export default function Modal({ isOpen, onClose }) {
             </div>
 
             {dropdownOpen && (
-              <ul className="dropdown-list">
+              <ul className="dropdown-list-1">
                 {Object.keys(districtData).map((district) => (
                   <li
                     key={district}
