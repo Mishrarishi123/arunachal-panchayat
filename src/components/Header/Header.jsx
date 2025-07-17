@@ -58,13 +58,15 @@ export default function Header() {
               <Link href="/">Home</Link>
             </li>
             <li onClick={closeMenu}>
-              <Link href="/about">About</Link>
+              <Link href="/about">About Us</Link>
             </li>
             <li onClick={closeMenu}>
               <Link href="/scheme">Scheme</Link>
             </li>
-            <li onClick={closeMenu}>
-              <a href="#footer">Contact</a>
+            <li>
+              <a href="#footer" onClick={closeMenu}>
+                Contact
+              </a>
             </li>
           </ul>
         </nav>

@@ -7,13 +7,17 @@ import Dprc from "../modal/Dprc/Dprc";
 import GrantContent from "../modal/Basic-grants/Grant-content";
 import TiedContent from "../modal/Tied-grants/Tied-content";
 import { Button } from "@/components/ui/button";
-
 const schemesData = [
   {
     title: "RGSA",
     color: "#32B400",
     itemColor: "#E8F5E8", // Light green for items
-    items: ["Panchayat Bhavan", "DRPC"],
+    items: [
+      "Panchayat Bhavan",
+      "DPRC",
+      "Training Imparted",
+      "Women PRI Leaders",
+    ],
   },
   {
     title: "SOR",
@@ -25,23 +29,19 @@ const schemesData = [
     title: "FC GRANTS",
     color: "#32B400",
     itemColor: "#E8F5E8", // Light green for items
-    items: ["Tied Funds", "Untied Funds"],
+    items: ["Tied Funds", "Untied Funds", "FAQ", "Scheme Related Links"],
   },
 ];
 
 const Scheme = () => {
   const [showPBModal, setShowPBModal] = useState(false);
-  const [showDRPCModal, setShowDRPCModal] = useState(false);
-
-  // ✅ Add these missing modal states
+  const [showDPRCModal, setShowDPRCModal] = useState(false);
   const [showBasicGrant, setShowBasicGrant] = useState(false);
   const [showPerformanceGrant, setShowPerformanceGrant] = useState(false);
   const [showTiedGrant, setShowTiedGrant] = useState(false);
   const [showUntiedGrant, setShowUntiedGrant] = useState(false);
-
   const [openDropdowns, setOpenDropdowns] = useState({});
 
- 
   const handleDropdownToggle = (index) => {
     setOpenDropdowns((prev) => ({
       ...prev,
@@ -49,18 +49,28 @@ const Scheme = () => {
     }));
   };
 
+  const handleGrantClick = (grantType) => {
+    switch (grantType) {
+      case "Basic Grants":
+        setShowBasicGrant(true);
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleItemClick = (item) => {
-    setOpenDropdowns({}); // Close all dropdowns
+    setOpenDropdowns({}); 
     switch (item) {
       case "Panchayat Bhavan":
         setShowPBModal(true);
         break;
-      case "DRPC":
-        setShowDRPCModal(true);
+      case "DPRC":
+        setShowDPRCModal(true);
         break;
-      case "Basic Grants":
-        setShowBasicGrant(true);
-        break;
+      // case "Basic Grants":
+      //   setShowBasicGrant(true);
+      //   break;
       case "Performance Grants":
         setShowPerformanceGrant(true);
         break;
@@ -176,12 +186,16 @@ const Scheme = () => {
         })}
       </div>
       <Modal isOpen={showPBModal} onClose={() => setShowPBModal(false)} />
-      <Dprc isOpen={showDRPCModal} onClose={() => setShowDRPCModal(false)} />
-      <GrantContent
-        isOpen={showBasicGrant}
-        onClose={() => setShowBasicGrant(false)}
-        type="Basic Grants"
-      />
+      <Dprc isOpen={showDPRCModal} onClose={() => setShowDPRCModal(false)} />
+        
+      {showBasicGrant && (
+        <GrantContent
+          isOpen={showBasicGrant}
+          onClose={() => setShowBasicGrant(false)}
+          type="Basic Grants"
+        />
+      )}
+
       <GrantContent
         isOpen={showPerformanceGrant}
         onClose={() => setShowPerformanceGrant(false)}

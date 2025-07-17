@@ -1,36 +1,568 @@
 "use client";
 import { motion } from "framer-motion";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-// import { OrbitControls } from "@react-three/drei";
+import { Canvas, useThree } from "@react-three/fiber";
 import Image from "next/image";
 import "./Map.css";
 import { Mapmodal } from "../mapmodal/Mapmodal";
 import { Suspense, useEffect, useRef, useState } from "react";
 import DistrictReportCard from "../ui/DistrictReportCard";
 
+const DISTRICT_DATA = [
+  {
+    name: "Lower Siang",
+    modelId: "polySurface29",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Upper Siang",
+    modelId: "Text013",
+    score: 15,
+    rank: "7th",
+    topCriteria: "Water, Health, Education",
+    totalSchemes: 60,
+    completedSchemes: 25,
+    ongoingSchemes: 35,
+    completedBudget: "₹30.0 Cr",
+    ongoingBudget: "₹45.0 Cr",
+    tags: [
+      { name: "Health", color: "blue" },
+      { name: "Education", color: "yellow" },
+    ],
+    panchayatBhawans: 8,
+    assets: 12,
+    revenue: "₹7.8L",
+    lastUpdated: "10 July 2025",
+  },
+  {
+    name: "Anjaw",
+    modelId: "Text019",
+    score: 22,
+    rank: "1st",
+    topCriteria: "Tourism, Roads, Power",
+    totalSchemes: 30,
+    completedSchemes: 15,
+    ongoingSchemes: 15,
+    completedBudget: "₹18.0 Cr",
+    ongoingBudget: "₹20.0 Cr",
+    tags: [
+      { name: "Tourism", color: "orange" },
+      { name: "Roads", color: "gray" },
+    ],
+    panchayatBhawans: 3,
+    assets: 7,
+    revenue: "₹6.5L",
+    lastUpdated: "15 July 2025",
+  },
+  {
+    name: "Diang Valley",
+    modelId: "Text014",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Papum Pare",
+    modelId: "polySurface44",
+    score: 22,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Changlang",
+    modelId: "Text020",
+    score: 22,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Tirap",
+    modelId: "Text021",
+    score: 24,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "East Siang",
+    modelId: "polySurface22",
+    score: 23,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Namsai",
+    modelId: "Text025",
+    score: 17,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Lower Dibang Valley",
+    modelId: "Text015",
+    score: 19,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "West Kameng",
+    modelId: "Text003",
+    score: 17,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Papum Pare",
+    modelId: "Text003",
+    score: 87,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Longding",
+    modelId: "Text022",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Kamle",
+    modelId: "Text008",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Keyi Panyor",
+    modelId: "Text023",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Siang",
+    modelId: "Text012",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Upper Subansiri",
+    modelId: "polySurface37",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Kra Daadi",
+    modelId: "Text007",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Pakke- Kessang",
+    modelId: "Text004",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Shi Yomi",
+    modelId: "Text010",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Kurung Kumey",
+    modelId: "polySurface39",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Bichom",
+    modelId: "Text001",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "West Siang",
+    modelId: "Text011",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "East Kameng",
+    modelId: "polySurface51",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Tawang",
+    modelId: "Text002",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+  {
+    name: "Lohit",
+    modelId: "Text018",
+    score: 20,
+    rank: "3rd",
+    topCriteria: "UC, GeoTag, SHG",
+    totalSchemes: 44,
+    completedSchemes: 11,
+    ongoingSchemes: 33,
+    completedBudget: "₹23.5 Cr",
+    ongoingBudget: "₹23.5 Cr",
+    tags: [
+      { name: "Infra", color: "purple" },
+      { name: "Green", color: "green" },
+      { name: "Livelihood", color: "red" },
+    ],
+    panchayatBhawans: 5,
+    assets: 9,
+    revenue: "₹5.2L",
+    lastUpdated: "12 July 2025",
+  },
+];
 
 function RotatingMapGroup({ children }) {
   const groupRef = useRef();
   const { viewport } = useThree();
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const baseScale = Math.min(viewport.width, viewport.height) * 0.01;
     setScale(baseScale);
   }, [viewport]);
-
-  // Mouse tracking
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      const x = (event.clientX / window.innerWidth) * 2 - 1;
-      const y = -(event.clientY / window.innerHeight) * 2 + 1;
-      setMouse({ x, y });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   return (
     <group ref={groupRef} scale={scale} rotation={[0, 0, Math.PI / 210]}>
@@ -40,25 +572,26 @@ function RotatingMapGroup({ children }) {
 }
 
 export default function Map() {
-  const [clickedName, setClickedName] = useState(null);
-  const handleDistrictClick = () => {
-    setClickedName("Papum Pare");
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
+
+  const handleDistrictClick = (meshName) => {
+    const found = DISTRICT_DATA.find((d) => d.modelId === meshName);
+    setSelectedDistrict(found || null);
   };
 
   return (
     <div className="map-section">
-      {/* Popup at top-left */}
-      {clickedName && (
+      {selectedDistrict && (
         <div className="popup-overlay">
           <div className="popup-top-left">
-            {clickedName && (
-              <DistrictReportCard onClose={() => setClickedName(null)} />
-            )}
+            <DistrictReportCard
+              districtData={selectedDistrict}
+              onClose={() => setSelectedDistrict(null)}
+            />
           </div>
         </div>
       )}
 
-      {/* Background Image */}
       <Image
         src="/images/map.jpg"
         alt="Map Background"
@@ -67,12 +600,10 @@ export default function Map() {
         priority
       />
 
-      {/* Overlays */}
       <div className="map-overlay-white" />
       <div className="map-overlay-left" />
       <div className="map-overlay-right" />
 
-      {/* Heading */}
       <motion.div
         className="map-text"
         initial={{ opacity: 0, y: 50 }}
@@ -83,7 +614,6 @@ export default function Map() {
         <h1>PANCHAYATI RAAJ AT A GLANCE</h1>
       </motion.div>
 
-      {/* 3D Model Canvas replacing static image */}
       <motion.div
         className="map-canvas-container"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -104,47 +634,19 @@ export default function Map() {
             style={{ background: "transparent" }}
             onWheel={(e) => e.preventDefault()}
           >
-            {/* Lights */}
             <ambientLight intensity={1.0} />
             <directionalLight
               position={[20, 60, 20]}
               intensity={1.8}
               castShadow
-              shadow-mapSize-width={2048}
-              shadow-mapSize-height={2048}
-              shadow-camera-far={200}
-              shadow-camera-left={-100}
-              shadow-camera-right={100}
-              shadow-camera-top={100}
-              shadow-camera-bottom={-100}
             />
             <pointLight position={[-20, 30, -20]} intensity={0.6} />
-            {/* Suspense with rotating group */}
+
             <Suspense fallback="Loading...">
               <RotatingMapGroup>
-                <Mapmodal
-                  clickedName={clickedName}
-                  setClickedName={setClickedName}
-                />
+                <Mapmodal onDistrictClick={handleDistrictClick} />
               </RotatingMapGroup>
             </Suspense>
-
-            {/* Orbit Controls */}
-            {/* <OrbitControls
-              maxPolarAngle={Math.PI / 2}
-              enableRotate={false}
-              enableZoom={false}
-              enablePan={false}
-              enableDamping={false}
-              dampingFactor={0.1}
-              rotateSpeed={0.8}
-              zoomSpeed={0.5}
-              mouseButtons={{
-                LEFT: 0,
-                MIDDLE: 1,
-                RIGHT: 2,
-              }}
-            /> */}
           </Canvas>
         </div>
       </motion.div>

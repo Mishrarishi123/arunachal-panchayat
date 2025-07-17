@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 
@@ -7,9 +8,7 @@ import "./Footer.css";
 
 export default function Footer() {
   return (
-    <section 
-    id="footer"
-    className="footer-section">
+    <section id="footer" className="footer-section">
       <div className="footer">
         <motion.div
           className="footer-container"
@@ -58,15 +57,52 @@ export default function Footer() {
                   <>
                     <h1>Other Link</h1>
                     <ul>
-                      <li>Feedback</li>
-                      <li>Testimonials</li>
-                      <li>Forms & Download</li>
-                      <li>Employee Corner</li>
-                      <li>Hyperlink Policy</li>
-                      <li>Terms of Use</li>
-                      <li>Privacy Policy</li>
-                      <li>Disclaimer</li>
-                      <li>Site Map</li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          {" "}
+                          Feedback
+                        </a>
+                      </li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          Testimonials
+                        </a>
+                      </li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          Forms & Download
+                        </a>
+                      </li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          Employee Corner
+                        </a>
+                      </li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          Hyperlink Policy
+                        </a>
+                      </li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          Terms of Use
+                        </a>
+                      </li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          Privacy Policy
+                        </a>
+                      </li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          Disclaimer
+                        </a>
+                      </li>
+                      <li>
+                        <a className="hover:text-blue-600" href="">
+                          Site Map
+                        </a>
+                      </li>
                     </ul>
                   </>
                 )}
@@ -93,6 +129,20 @@ export default function Footer() {
                         Working Hours:
                         <br />
                         Opens at 10:30 AM - Closes at 5:30 PM
+                      </li>
+                    </ul>
+                    <ul className="flex gap-4">
+                      <Link
+                        href="/grievance"
+                        className="hover:text-blue-600 text-[#7B7B7B]"
+                      >
+                        Grievance
+                      </Link>
+                      <li>
+                        {" "}
+                        <a className="hover:text-blue-600" href="">
+                          Right To Inform(RTI)
+                        </a>
                       </li>
                     </ul>
                   </>

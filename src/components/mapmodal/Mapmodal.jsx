@@ -3,9 +3,8 @@ import React, { forwardRef, useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
 
-export const Mapmodal = forwardRef(function Mapmodal(props, ref) {
+export const Mapmodal = forwardRef(function Mapmodal({ onDistrictClick }, ref) {
   const { nodes, materials } = useGLTF("/modals/MAP_AP.glb");
-
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
@@ -55,15 +54,13 @@ export const Mapmodal = forwardRef(function Mapmodal(props, ref) {
   ];
 
   return (
-    <group ref={ref} {...props} dispose={null}>
+    <group ref={ref} dispose={null}>
       {meshNames.map((name) => {
         const node = nodes[name];
         if (!node?.geometry) return null;
 
-        const isClicked = props.clickedName === name;
-
         const { scale } = useSpring({
-          scale: isClicked ? [1.04, 1.04, 1.04] : [1, 1, 1],
+          scale: hovered === name ? [1.05, 1.05, 1.05] : [1, 1, 1],
           config: { mass: 1, tension: 180, friction: 18 },
         });
 
@@ -74,17 +71,17 @@ export const Mapmodal = forwardRef(function Mapmodal(props, ref) {
             material={materials.Material}
             scale={scale}
             onClick={(e) => {
-              props.setClickedName(name);
               e.stopPropagation();
+              onDistrictClick(name);
             }}
             onPointerOver={(e) => {
               e.stopPropagation();
-              setHovered(true);
+              setHovered(name);
               document.body.style.cursor = "pointer";
             }}
             onPointerOut={(e) => {
               e.stopPropagation();
-              setHovered(false);
+              setHovered(null);
               document.body.style.cursor = "default";
             }}
           />
@@ -92,4 +89,40 @@ export const Mapmodal = forwardRef(function Mapmodal(props, ref) {
       })}
     </group>
   );
+  // <group ref={ref} {...props} dispose={null}>
+  //   {meshNames.map((name) => {
+  //     const node = nodes[name];
+  //     if (!node?.geometry) return null;
+
+  //     const isClicked = props.clickedName === name;
+
+  //     const { scale } = useSpring({
+  //       scale: isClicked ? [1.04, 1.04, 1.04] : [1, 1, 1],
+  //       config: { mass: 1, tension: 180, friction: 18 },
+  //     });
+
+  //     return (
+  //       <a.mesh
+  //         key={name}
+  //         geometry={node.geometry}
+  //         material={materials.Material}
+  //         scale={scale}
+  //         onClick={(e) => {
+  //           props.setClickedName(name);
+  //           e.stopPropagation();
+  //         }}
+  //         onPointerOver={(e) => {
+  //           e.stopPropagation();
+  //           setHovered(true);
+  //           document.body.style.cursor = "pointer";
+  //         }}
+  //         onPointerOut={(e) => {
+  //           e.stopPropagation();
+  //           setHovered(false);
+  //           document.body.style.cursor = "default";
+  //         }}
+  //       />
+  //     );
+  //   })}
+  // </group>
 });

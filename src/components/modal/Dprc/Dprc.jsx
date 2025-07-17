@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./Dprc.css";
 
 /**
- * DRPC Modal Component
+ * DPRC Modal Component
  * @param {{ isOpen: boolean, onClose: function }} props
  */
 const Dprc = ({ isOpen, onClose }) => {
@@ -21,27 +21,27 @@ const Dprc = ({ isOpen, onClose }) => {
     setDropdownOpen(false);
   };
 
-  // Sample DRPC data - replace with your actual data
-  const drpcImages = [
+  // Sample DPRC data - replace with your actual data
+  const dprcImages = [
     {
       id: 1,
       src: "/images/drpc1.png",
-      alt: "DRPC 1",
+      alt: "DPRC 1",
     },
     {
       id: 2,
       src: "/images/drpc2.png",
-      alt: "DRPC 2",
+      alt: "DPRC 2",
     },
     {
       id: 3,
       src: "/images/drpc3.png",
-      alt: "DRPC 3",
+      alt: "DPRC 3",
     },
     {
       id: 4,
       src: "/images/drpc4.png",
-      alt: "DRPC 4",
+      alt: "DPRC 4",
     },
   ];
 
@@ -53,7 +53,7 @@ const Dprc = ({ isOpen, onClose }) => {
     "District-5",
   ];
 
-  const drpcInfo = {
+  const dprcInfo = {
     name: "District Resource Person Cluster",
     status: "Active",
   };
@@ -100,7 +100,7 @@ const Dprc = ({ isOpen, onClose }) => {
             </div>
 
             <div className="cont-img">
-              {drpcImages.map((image) => (
+              {dprcImages.map((image) => (
                 <div
                   key={image.id}
                   className="image-card"

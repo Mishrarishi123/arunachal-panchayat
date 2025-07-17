@@ -128,7 +128,7 @@
 }
 
 .dropdown-content-inline.open {
-    height: 15vh;
+    height: 25vh;
     margin-top: 1.5rem;
     max-height: 500px;
     background-color: white;
