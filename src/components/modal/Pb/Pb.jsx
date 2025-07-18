@@ -72,7 +72,7 @@ export default function Modal({ isOpen, onClose }) {
 
             <div className="table-horizontal-line"></div>
 
-            <div>
+            {/* <div>
               <div className="pb-table-2">
                 <div>{bhawanInfo.name}</div>
                 <div>
@@ -85,7 +85,7 @@ export default function Modal({ isOpen, onClose }) {
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="table-horizontal-line"></div>
           </div>
         )}

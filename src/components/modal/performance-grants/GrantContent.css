@@ -39,6 +39,44 @@
     margin: 8px auto;
 }
 
+.basic-district {
+    padding: 2rem 2rem;
+    background: #f1f1f1;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2vw;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    cursor: pointer;
+    width: 30vw;
+    margin: 0 auto;
+}
+
+.dropdown-district-list {
+    margin-top: 0.5rem;
+    list-style: none;
+    padding: 0.5rem;
+    border-radius: 12px;
+    background: #f1f1f1;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dropdown-district-list li {
+    font-size: 1.2vw;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.dropdown-district-list li:hover {
+    border-radius: 12px;
+    background: #e0e0e0;
+}
+
 .cont-img {
     justify-content: center;
     padding: 1rem 2rem;
@@ -47,6 +85,25 @@
     flex-wrap: row;
     align-items: center;
 }
+
+.basic-grant-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6rem;
+}
+
+.image-item {
+    width: 15vw;
+    height: 20vh;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+
 
 .district-dropdown {
     justify-content: center;
@@ -66,15 +123,24 @@
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     margin: 0;
 }
+
 /* Container for district list */
 .pb-dropdown {
     margin-top: 2rem;
 }
 
 .district-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    padding: 2rem 2rem;
+    background: #f1f1f1;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    cursor: pointer;
+    max-width: 30vw;
+    margin: 0 auto;
 }
 
 /* Display as a grid, not a dropdown */
@@ -251,6 +317,51 @@
     animation: modalFadeIn 0.2s ease-out;
 }
 
+@media (max-width: 1024px) {
+    .basic-district {
+        padding: 1.3rem 2rem;
+        background: #f1f1f1;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1.1vw;
+        font-size: 1.2rem;
+        cursor: pointer;
+        width: 36vw;
+        margin: 0 auto;
+    }
+
+    .dropdown-district-list {
+        margin-top: 0.5rem;
+        list-style: none;
+        padding: 0.5rem;
+        border-radius: 12px;
+        background: #f1f1f1;
+        max-width: 36vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .basic-grant-images {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        margin-top: 6rem;
+    }
+
+    .image-item {
+        width: auto;
+        height: 20vh;
+        object-fit: cover;
+        border-radius: 0.5rem;
+    }
+}
+
 /* Tablet Styles (768px and below) */
 @media (max-width: 768px) {
     .grant-overlay {
@@ -270,6 +381,47 @@
         text-align: center;
         max-width: 100%;
     }
+
+    .basic-district {
+        padding: 1.3rem 2rem;
+        background: #f1f1f1;
+        border-radius: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1.2vw;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        cursor: pointer;
+        width: 40vw;
+        margin: 0 auto;
+    }
+
+    .image-item {
+        width: auto;
+        height: 17vh;
+        object-fit: cover;
+        border-radius: 0.5rem;
+    }
+
+    .basic-grant-images {
+        gap: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 6rem;
+    }
+
+    /* 
+    .basic-grant-images {
+        gap: 2rem;
+        display: flex;
+        flex-direction: row;
+        height: 20vh;
+        width: 15vw;
+    } */
+
 
     .cont-img {
         padding: 1rem;
@@ -299,6 +451,61 @@
 
 /* Mobile Styles (480px and below) */
 @media (max-width: 480px) {
+
+    /* .basic-district {
+            padding: 2rem 2rem;
+            background: #f1f1f1;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2vw;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            cursor: pointer;
+            width: 30vw;
+            margin: 0 auto;
+        } */
+
+    .basic-grant-images {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: baseline;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    .basic-district {
+        padding: 1.3rem 2rem;
+        background: #f1f1f1;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1.2vw;
+        font-size: 4.5vw;
+        cursor: pointer;
+        width: auto;
+        margin: 0 auto;
+    }
+
+    .image-item {
+        width: auto;
+        height: 20vh;
+        object-fit: cover;
+        border-radius: 0.5rem;
+    }
+
+    .dropdown-district-list li {
+        font-size: 3vw;
+        font-weight: 700;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+    }
+
     .grant-overlay {
         padding: 0.25rem;
         align-items: flex-start;

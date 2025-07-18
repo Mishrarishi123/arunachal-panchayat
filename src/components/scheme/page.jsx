@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import "./Scheme.css";
 import Modal from "../modal/Pb/Pb";
 import Dprc from "../modal/Dprc/Dprc";
-import GrantContent from "../modal/Basic-grants/Grant-content";
+import GrantContent from "../modal/performance-grants/Grant-content";
 import TiedContent from "../modal/Tied-grants/Tied-content";
 import { Button } from "@/components/ui/button";
 const schemesData = [
