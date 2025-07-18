@@ -68,9 +68,9 @@ const Scheme = () => {
       case "DPRC":
         setShowDPRCModal(true);
         break;
-      // case "Basic Grants":
-      //   setShowBasicGrant(true);
-      //   break;
+      case "Basic Grants":
+        setShowBasicGrant(true);
+        break;
       case "Performance Grants":
         setShowPerformanceGrant(true);
         break;
